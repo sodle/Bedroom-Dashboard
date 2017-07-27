@@ -1,0 +1,19 @@
+.ClockPanel {
+  height: 100vh;
+  background: black;
+}
+
+.ClockText {
+  color: white;
+  position: absolute;
+  text-align: center;
+  transition: opacity 0.5s;
+}
+
+.TimeText {
+  font-size: 5em;
+}
+
+.DateText {
+  font-size: 2em;
+}
