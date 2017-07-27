@@ -12,31 +12,31 @@ class ClockText extends Component {
     this.state = {};
   }
   componentDidMount() {
-    this.updateClockState(this);
-    this.updatePosition(this);
-    this.moveIntervalID = setInterval(() => this.updatePosition(this), this.moveIntervalSec * 1000);
+    this.updateClockState();
+    this.updatePosition();
+    this.moveIntervalID = setInterval(() => this.updatePosition(), this.moveIntervalSec * 1000);
   }
   componentWillUnmount() {
     cancelAnimationFrame(this.clockFrame);
     clearInterval(this.moveIntervalID);
   }
-  updateClockState(self) {
-    self.setState(self.getClockState);
-    self.clockFrame = requestAnimationFrame(() => self.updateClockState(self));
+  updateClockState() {
+    this.setState(this.getClockState);
+    this.clockFrame = requestAnimationFrame(() => this.updateClockState());
   }
-  updatePosition(self) {
-    var myH = $(self.refs.self).height();
-    var myW = $(self.refs.self).width();
+  updatePosition() {
+    var myH = $(this.refs.self).height();
+    var myW = $(this.refs.self).width();
 
-    var vpH = $(self.refs.self.parentNode).height();
-    var vpW = $(self.refs.self.parentNode).width();
+    var vpH = $(this.refs.self.parentNode).height();
+    var vpW = $(this.refs.self.parentNode).width();
 
     var maxY = vpH - myH;
     var maxX = vpW - myW;
 
-    self.setState({
+    this.setState({
       alpha: 0
-    }, () => setTimeout(() => self.setState({
+    }, () => setTimeout(() => this.setState({
       x: Math.random() * maxX,
       y: Math.random() * maxY,
       alpha: 1
