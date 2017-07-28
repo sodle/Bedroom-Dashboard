@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import strftime from 'strftime'
-import $ from 'jquery'
 import './ClockPanel.css'
 
 class ClockText extends Component {
   clockFrame = 0
   moveIntervalSec = 5
   moveIntervalID = 0
+  minMoveDistance = 10
+  maxMoveRerolls = 10
   constructor(props) {
     super(props);
     this.state = {};
@@ -25,14 +26,34 @@ class ClockText extends Component {
     this.clockFrame = requestAnimationFrame(() => this.updateClockState());
   }
   updatePosition() {
-    var myH = $(this.refs.self).height();
-    var myW = $(this.refs.self).width();
+    var myH = this.refs.self.offsetHeight;
+    var myW = this.refs.self.offsetWidth;
 
-    var vpH = $(this.refs.self.parentNode).height();
-    var vpW = $(this.refs.self.parentNode).width();
+    var vpH = this.refs.self.parentNode.offsetHeight;
+    var vpW = this.refs.self.parentNode.offsetWidth;
 
     var maxY = vpH - myH;
     var maxX = vpW - myW;
+
+    var rerolls = 0;
+
+    var newX = Math.random() * maxX;
+    while (newX - this.state.x < this.minMoveDistance) {
+      if (rerolls > this.maxMoveRerolls)
+        break;
+      console.log('reroll x');
+      newX = Math.random() * maxX;
+      rerolls++;
+    }
+
+    var newY = Math.random() * maxY;
+    while (newY - this.state.y < this.minMoveDistance) {
+      if (rerolls > this.maxMoveRerolls)
+        break;
+      console.log('reroll y');
+      newY = Math.random() * maxY;
+      rerolls++;
+    }
 
     this.setState({
       alpha: 0

@@ -1,6 +1,7 @@
 .ClockPanel {
   height: 100vh;
   background: black;
+  overflow: hidden;
 }
 
 .ClockText {
