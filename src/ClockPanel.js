@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import strftime from 'strftime'
-import './ClockPanel.css'
+import strftime from 'strftime';
+import './ClockPanel.css';
 
 class ClockText extends Component {
   clockFrame = 0
