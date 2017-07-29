@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { weatherZIP } from './config';
+import { weatherZIP } from './config.js';
 
 console.log(weatherZIP);
 
